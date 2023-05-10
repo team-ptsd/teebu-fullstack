@@ -1,5 +1,7 @@
+import AuthSignUpForm from '@/components/client/forms/AuthSignUpForm';
+
 const Page = () => {
-  return <div>Page</div>;
+  return <AuthSignUpForm />;
 };
 
 export default Page;

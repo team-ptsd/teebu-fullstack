@@ -1,7 +1,7 @@
-import SignInForm from '@/components/client/forms/auth/SignInForm';
+import AuthSignInForm from '@/components/client/forms/AuthSignInForm';
 
 const Page = () => {
-  return <SignInForm />;
+  return <AuthSignInForm />;
 };
 
 export default Page;
