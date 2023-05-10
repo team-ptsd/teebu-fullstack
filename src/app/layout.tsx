@@ -21,7 +21,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <html lang='kr' className={theme === 'dark' ? 'dark' : 'light'}>
-      <body className={baseFont.className}>
+      <body className={`${baseFont.className} dark:text-white dark:bg-slate-600`}>
         <SupabaseProvider>
           <Header />
           {children}
