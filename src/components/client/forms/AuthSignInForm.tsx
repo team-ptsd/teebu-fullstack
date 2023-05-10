@@ -1,7 +1,9 @@
 'use client';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 import Link from 'next/link';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useSupabase } from '@/app/supabase-provider';
 
 type SignInInputs = {
   email: string;
@@ -9,6 +11,8 @@ type SignInInputs = {
 };
 
 const AuthSignInForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { supabase } = useSupabase();
   const {
     register,
     handleSubmit,
@@ -58,7 +62,11 @@ const AuthSignInForm = () => {
           className={'border border-gray-300 dark:border-gray-700 rounded-md p-2 mb-4'}
         />
 
-        <button type={'submit'} className={'bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2'}>
+        <button
+          disabled={isLoading}
+          type={'submit'}
+          className={'bg-blue-500 disabled:bg-gray-300 hover:bg-blue-600 text-white rounded-md p-2'}
+        >
           로그인
         </button>
 
