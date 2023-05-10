@@ -44,8 +44,8 @@ const AuthSignUpForm = () => {
         title: '회원가입',
         content: '회원가입에 실패했습니다.',
       });
-    } finally {
       setIsLoading(false);
+    } finally {
     }
   };
 
