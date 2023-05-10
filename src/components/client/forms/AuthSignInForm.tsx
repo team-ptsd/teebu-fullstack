@@ -27,12 +27,13 @@ const AuthSignInForm = () => {
   const onSubmit: SubmitHandler<SignInInputs> = async (inputs: SignInInputs) => {
     try {
       setIsLoading(true);
-      const { error } = await supabase.auth.signInWithPassword({
+      await supabase.auth.signInWithPassword({
         email: inputs.email,
         password: inputs.password,
       });
 
       router.refresh();
+      router.push('/');
     } catch (e) {
       setModal({
         isOpen: true,
@@ -40,7 +41,6 @@ const AuthSignInForm = () => {
         content: '로그인에 실패했습니다.',
       });
       setIsLoading(false);
-    } finally {
     }
   };
 

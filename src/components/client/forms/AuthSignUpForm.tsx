@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSupabase } from '@/app/supabase-provider';
 import useModalStore from '@/store/useModalStore';
+import { useRouter } from 'next/navigation';
 
 type SignUnInputs = {
   email: string;
@@ -14,7 +15,9 @@ type SignUnInputs = {
 };
 
 const AuthSignUpForm = () => {
+  const router = useRouter();
   const setModal = useModalStore(store => store.setModal);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const { supabase } = useSupabase();
@@ -33,10 +36,13 @@ const AuthSignUpForm = () => {
         password: inputs.password,
       });
 
+      router.refresh();
+      router.push('/auth/sign-in');
+
       setModal({
         isOpen: true,
         title: '회원가입',
-        content: '회원가입이 완료되었습니다.',
+        content: '회원가입이 완료되었습니다. 이메일을 확인 후 로그인해주세요.',
       });
     } catch (e) {
       setModal({
@@ -45,7 +51,6 @@ const AuthSignUpForm = () => {
         content: '회원가입에 실패했습니다.',
       });
       setIsLoading(false);
-    } finally {
     }
   };
 
