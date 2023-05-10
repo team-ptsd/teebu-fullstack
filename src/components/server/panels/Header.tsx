@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import ThemeSwitchBtn from '@/components/client/buttons/ThemeSwitchBtn';
+import { Suspense } from 'react';
+import MyPageBtn from '@/components/server/buttons/MyPageBtn';
 
 const Header = () => {
   return (
@@ -12,7 +14,10 @@ const Header = () => {
         <nav className='flex gap-4'>
           <ThemeSwitchBtn />
 
-          <Link href={'/auth/sign-in'}>Sign in</Link>
+          <Suspense fallback={<div className='w-9 h-6 bg-gray-200 dark:bg-slate-400 rounded' />}>
+            {/* @ts-ignore ASC */}
+            <MyPageBtn />
+          </Suspense>
         </nav>
       </div>
     </header>
