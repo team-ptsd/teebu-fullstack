@@ -2,6 +2,7 @@ import './globals.css';
 
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import { Noto_Serif_KR } from 'next/font/google';
 
 import SupabaseProvider from '@/app/supabase-provider';
@@ -15,8 +16,11 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
+  const cookieStore = cookies();
+  const theme = cookieStore.get('theme')?.value;
+
   return (
-    <html lang='kr'>
+    <html lang='kr' className={theme === 'dark' ? 'dark' : 'light'}>
       <body className={baseFont.className}>
         <SupabaseProvider>
           <Header />
