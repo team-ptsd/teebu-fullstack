@@ -1,11 +1,14 @@
 import { ReactNode } from 'react';
-import { Inter } from 'next/font/google';
+import { Metadata } from 'next';
+import { Noto_Serif_KR } from 'next/font/google';
+
+import SupabaseProvider from '@/app/supabase-provider';
 
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const baseFont = Noto_Serif_KR({ subsets: ['latin'], weight: ['400', '700'] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Teebu',
   description: 'Sell Your Seal!',
 };
@@ -13,7 +16,9 @@ export const metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang='kr'>
-      <body className={inter.className}>{children}</body>
+      <body className={baseFont.className}>
+        <SupabaseProvider>{children}</SupabaseProvider>
+      </body>
     </html>
   );
 };
