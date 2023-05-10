@@ -1,7 +1,7 @@
 'use client';
 
-import useModalStore from '@/store/useModalStore';
 import { MouseEventHandler } from 'react';
+import useModalStore from '@/store/useModalStore';
 
 const Modal = () => {
   const {
@@ -9,15 +9,15 @@ const Modal = () => {
     setModal,
   } = useModalStore();
 
-  const handleClose: MouseEventHandler = e => {
+  const handleClose: MouseEventHandler = () => {
     setModal({ isOpen: false, content: '', title: '' });
   };
 
   return (
     <>
       {isOpen && (
-        <div className={'z-10 fixed left-0 top-0 bg-black'}>
-          <div className={'flex flex-col justify-center items-center w-screen h-screen'}>
+        <div className={'z-10 flex flex-col justify-center items-center fixed left-0 top-0 bg-black/50 w-full h-full'}>
+          <div className={'bg-white dark:bg-slate-600 p-2 md:p-4 rounded-xl'}>
             <h1 className={'text-2xl font-bold'}>{title}</h1>
             <p>{content}</p>
             <button onClick={handleClose}>닫기</button>
