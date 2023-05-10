@@ -1,6 +1,6 @@
 import './globals.css';
 
-import { ReactNode, Suspense } from 'react';
+import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { Noto_Serif_KR } from 'next/font/google';
