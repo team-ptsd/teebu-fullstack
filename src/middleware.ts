@@ -17,9 +17,5 @@ export const middleware = async (req: NextRequest) => {
     return NextResponse.redirect(new URL('/', req.url));
   }
 
-  if (path.startsWith('/user') && !session) {
-    return NextResponse.redirect(new URL('/auth/sign-in', req.url));
-  }
-
   return res;
 };
