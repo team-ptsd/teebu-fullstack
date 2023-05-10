@@ -1,7 +1,6 @@
-import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs';
-import { cookies, headers } from 'next/headers';
-import LogoutBtn from '@/components/client/buttons/LogoutBtn';
 import Link from 'next/link';
+import { cookies, headers } from 'next/headers';
+import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs';
 
 const MyPageBtn = async () => {
   const supabase = createServerComponentSupabaseClient({
