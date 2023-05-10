@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSupabase } from '@/app/supabase-provider';
+import useModalStore from '@/store/useModalStore';
+import { useRouter } from 'next/navigation';
 
 type SignInInputs = {
   email: string;
@@ -11,6 +13,9 @@ type SignInInputs = {
 };
 
 const AuthSignInForm = () => {
+  const router = useRouter();
+  const setModal = useModalStore(store => store.setModal);
+
   const [isLoading, setIsLoading] = useState(false);
   const { supabase } = useSupabase();
   const {
@@ -19,8 +24,24 @@ const AuthSignInForm = () => {
     formState: { errors },
   } = useForm<SignInInputs>();
 
-  const onSubmit: SubmitHandler<SignInInputs> = (data: SignInInputs) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<SignInInputs> = async (inputs: SignInInputs) => {
+    try {
+      setIsLoading(true);
+      const { error } = await supabase.auth.signInWithPassword({
+        email: inputs.email,
+        password: inputs.password,
+      });
+
+      router.refresh();
+    } catch (e) {
+      setModal({
+        isOpen: true,
+        title: '로그인',
+        content: '로그인에 실패했습니다.',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

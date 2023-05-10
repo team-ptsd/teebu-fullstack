@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSupabase } from '@/app/supabase-provider';
+import useModalStore from '@/store/useModalStore';
 
 type SignUnInputs = {
   email: string;
@@ -13,7 +14,9 @@ type SignUnInputs = {
 };
 
 const AuthSignUpForm = () => {
+  const setModal = useModalStore(store => store.setModal);
   const [isLoading, setIsLoading] = useState(false);
+
   const { supabase } = useSupabase();
   const {
     register,
@@ -23,12 +26,27 @@ const AuthSignUpForm = () => {
   } = useForm<SignUnInputs>();
 
   const onSubmit: SubmitHandler<SignUnInputs> = async (inputs: SignUnInputs) => {
-    setIsLoading(true);
-    const { data, error } = await supabase.auth.signUp({
-      email: inputs.email,
-      password: inputs.password,
-    });
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const { data, error } = await supabase.auth.signUp({
+        email: inputs.email,
+        password: inputs.password,
+      });
+
+      setModal({
+        isOpen: true,
+        title: '회원가입',
+        content: '회원가입이 완료되었습니다.',
+      });
+    } catch (e) {
+      setModal({
+        isOpen: true,
+        title: '회원가입',
+        content: '회원가입에 실패했습니다.',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
