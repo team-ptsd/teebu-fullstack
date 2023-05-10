@@ -1,6 +1,6 @@
 import './globals.css';
 
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { Noto_Serif_KR } from 'next/font/google';
@@ -25,6 +25,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       <body className={`${baseFont.className} dark:text-white dark:bg-slate-600`}>
         <SupabaseProvider>
           <Modal />
+
           <Header />
 
           <main className='max-w-6xl mx-auto min-h-[calc(100vh-60px)]'>{children}</main>
