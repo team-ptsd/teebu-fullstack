@@ -28,7 +28,6 @@ const AuthSignUpForm = () => {
       email: inputs.email,
       password: inputs.password,
     });
-    console.log(data);
     setIsLoading(false);
   };
 
