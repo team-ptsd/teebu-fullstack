@@ -9,7 +9,11 @@ const Header = () => {
           <Link href={'/'}>Teebu</Link>
         </h1>
 
-        <ThemeSwitchBtn />
+        <nav className='flex gap-4'>
+          <ThemeSwitchBtn />
+
+          <Link href={'/auth/sign-in'}>Sign in</Link>
+        </nav>
       </div>
     </header>
   );

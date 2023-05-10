@@ -14,7 +14,11 @@ const SignInForm = () => {
     console.log(data);
   };
 
-  return <form onSubmit={handleSubmit(onSubmit)}>SignIn</form>;
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h3 className={'font-bold text-2xl text-center'}>로그인</h3>
+    </form>
+  );
 };
 
 export default SignInForm;

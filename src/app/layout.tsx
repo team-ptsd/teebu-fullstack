@@ -24,7 +24,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       <body className={`${baseFont.className} dark:text-white dark:bg-slate-600`}>
         <SupabaseProvider>
           <Header />
-          {children}
+
+          <main className='max-w-6xl mx-auto min-h-[calc(100vh-60px)]'>{children}</main>
         </SupabaseProvider>
       </body>
     </html>
