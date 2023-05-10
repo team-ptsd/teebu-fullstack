@@ -13,7 +13,7 @@ const MyPageBtn = async () => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  return <>{session ? <LogoutBtn /> : <Link href={'/auth/sign-in'}>로그인</Link>}</>;
+  return <>{session ? <Link href={'/user'}>프로필</Link> : <Link href={'/auth/sign-in'}>로그인</Link>}</>;
 };
 
 export default MyPageBtn;
