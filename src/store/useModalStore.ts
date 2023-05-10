@@ -6,12 +6,12 @@ type Modal = {
   content: string;
 };
 
-type ModalStore = {
+type UseModalStore = {
   modal: Modal;
   setModal: (modal: Modal) => void;
 };
 
-const modalStore = create<ModalStore>(set => ({
+const useModalStore = create<UseModalStore>(set => ({
   modal: {
     isOpen: false,
     title: '',
@@ -20,4 +20,4 @@ const modalStore = create<ModalStore>(set => ({
   setModal: modal => set({ modal }),
 }));
 
-export default modalStore;
+export default useModalStore;
