@@ -32,7 +32,7 @@ const AuthSignInForm = () => {
           id={'email'}
           type={'email'}
           {...register('email', {
-            required: true,
+            required: '이메일을 입력해주세요.',
             pattern: {
               value: /\S+@\S+\.\S+/,
               message: '이메일 형식이 올바르지 않습니다.',
@@ -41,11 +41,20 @@ const AuthSignInForm = () => {
           className={'border border-gray-300 dark:border-gray-700 rounded-md p-2 mb-4'}
         />
 
-        <label htmlFor={'password'}>비밀번호</label>
+        <div className={'flex justify-between'}>
+          <label htmlFor={'password'}>비밀번호</label>
+          {errors.password && <span className={'text-red-500 ml-2'}>{errors.password.message}</span>}
+        </div>
         <input
           id={'password'}
           type={'password'}
-          {...register('password', { required: true })}
+          {...register('password', {
+            required: '비밀번호를 입력해주세요.',
+            minLength: {
+              value: 8,
+              message: '비밀번호는 8자 이상이어야 합니다.',
+            },
+          })}
           className={'border border-gray-300 dark:border-gray-700 rounded-md p-2 mb-4'}
         />
 
