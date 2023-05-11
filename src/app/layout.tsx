@@ -28,7 +28,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
 
           <Header />
 
-          <main className='max-w-6xl mx-auto min-h-[calc(100vh-60px)]'>{children}</main>
+          <main className='min-h-[calc(100vh-60px)]'>{children}</main>
         </SupabaseProvider>
       </body>
     </html>

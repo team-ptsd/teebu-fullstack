@@ -32,7 +32,6 @@ const AuthSignInForm = () => {
         password: inputs.password,
       });
 
-      router.refresh();
       router.push('/');
     } catch (e) {
       setModal({
