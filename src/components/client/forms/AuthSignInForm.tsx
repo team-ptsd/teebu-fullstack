@@ -27,10 +27,14 @@ const AuthSignInForm = () => {
   const onSubmit: SubmitHandler<SignInInputs> = async (inputs: SignInInputs) => {
     try {
       setIsLoading(true);
-      await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email: inputs.email,
         password: inputs.password,
       });
+
+      if (error) {
+        throw error;
+      }
 
       router.push('/');
     } catch (e) {

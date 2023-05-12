@@ -3,6 +3,15 @@ import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-next
 import { redirect } from 'next/navigation';
 import LogoutBtn from '@/components/client/buttons/LogoutBtn';
 
+type Profile = {
+  id: string;
+  user_id: string;
+  user_name: string;
+  created_at: string;
+};
+
+export const revalidate = false;
+
 const Page = async () => {
   const supabase = createServerComponentSupabaseClient({
     headers,
@@ -17,9 +26,18 @@ const Page = async () => {
     redirect('/auth/sign-in');
   }
 
+  const { data: users } = await supabase.from('profiles').select('*').eq('user_id', session.user.id);
+
+  if (!users) {
+    redirect('/auth/sign-in');
+  }
+
+  const user = (users as Profile[])[0];
+
   return (
-    <div>
-      <p>{session?.user.email}</p>
+    <div className='max-w-6xl mx-auto p-2 md:p-4 flex justify-between'>
+      <p>{user.user_name}</p>
+
       <LogoutBtn />
     </div>
   );

@@ -31,12 +31,23 @@ const AuthSignUpForm = () => {
   const onSubmit: SubmitHandler<SignUnInputs> = async (inputs: SignUnInputs) => {
     try {
       setIsLoading(true);
-      const { data, error } = await supabase.auth.signUp({
+      const { data, error: userError } = await supabase.auth.signUp({
         email: inputs.email,
         password: inputs.password,
       });
 
-      router.refresh();
+      if (userError || !data.user) {
+        throw userError;
+      }
+
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({ user_id: data.user.id, user_name: inputs.username });
+
+      if (profileError) {
+        throw profileError;
+      }
+
       router.push('/auth/sign-in');
 
       setModal({
